@@ -1,6 +1,6 @@
-/** (c) 2004 Uri Wilensky. See README.txt for terms of use. **/
+// (c) 2004-2011 Uri Wilensky. See README.md for terms of use.
 
-package edu.nwu.ccl.nlogo.extensions.speech;
+package org.nlogo.extensions.speech;
 
 import java.util.Enumeration;
 import java.util.ArrayList;
@@ -10,13 +10,6 @@ import org.nlogo.api.DefaultReporter;
 import org.nlogo.api.Argument; 
 import org.nlogo.api.Context;
 import org.nlogo.api.ExtensionException;
-
-// This OS X-only NetLogo extension uses the "Humble Narrator" library by 
-// Gregory Guerin to provide two primitives for speech synthesis.
-
-// The two primitives are:
-// * "voices", which reports a list of available voices
-// * "speak [voice] [content]" which speaks
 
 public class SpeechExtension extends org.nlogo.api.DefaultClassManager {
 
