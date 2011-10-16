@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
 Extension-Name: speech
 Class-Manager: org.nlogo.extensions.speech.SpeechExtension
+NetLogo-Extension-API-Version: 5.0
