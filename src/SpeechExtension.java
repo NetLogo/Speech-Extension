@@ -9,21 +9,27 @@ import org.nlogo.api.DefaultCommand;
 import org.nlogo.api.DefaultReporter;
 import org.nlogo.api.Argument; 
 import org.nlogo.api.Context;
+import org.nlogo.api.LogoList;
+import org.nlogo.api.LogoException;
+import org.nlogo.api.PrimitiveManager;
+import org.nlogo.api.ExtensionManager;
+import org.nlogo.api.Syntax;
+import org.nlogo.api.DefaultClassManager;
 import org.nlogo.api.ExtensionException;
 
-public class SpeechExtension extends org.nlogo.api.DefaultClassManager {
+public class SpeechExtension extends DefaultClassManager {
 
   private static glguerin.narrator.Narrator narrator; // the synthesizer
   private static java.util.List<String> voices; // list of available voices
 
   // Loads the primitives
-  public void load(org.nlogo.api.PrimitiveManager primManager) {
+  public void load(PrimitiveManager primManager) {
     primManager.addPrimitive("speak", new Speak());
     primManager.addPrimitive("voices", new ListVoices());
   }
   
   // Initializes the narrator and the list of voices
-  public void runOnce(org.nlogo.api.ExtensionManager em) 
+  public void runOnce(ExtensionManager em) 
   throws ExtensionException {
     // make sure we're running on a mac
     if(!System.getProperty("os.name").startsWith("Mac")) {
@@ -50,27 +56,26 @@ public class SpeechExtension extends org.nlogo.api.DefaultClassManager {
   public static class ListVoices extends DefaultReporter {
     public Syntax getSyntax() {
       // this reporter takes no arguments and returns a list
-      return Syntax.reporterSyntax(Syntax.TYPE_LIST);
+      return Syntax.reporterSyntax(Syntax.ListType());
     }
-    public Object report(Argument args[] , Context context)
+    public Object report(Argument args[], Context context)
     throws ExtensionException {
-    
       if(! System.getProperty("os.name").startsWith("Mac")) { 
-        return new org.nlogo.api.LogoList();
+        return LogoList.Empty();
       }
-      return new org.nlogo.api.LogoList(voices);
+      return LogoList.fromJava(voices);
     }
   }
   
   // NetLogo command generates speech.
   public static class Speak extends DefaultCommand {
-    public org.nlogo.api.Syntax getSyntax() {
+    public Syntax getSyntax() {
       // this reporter takes two arguments: a string and a wildcard
-      int[] right = { Syntax.TYPE_STRING, Syntax.TYPE_WILDCARD };
+      int[] right = { Syntax.StringType(), Syntax.WildcardType() };
       return Syntax.commandSyntax(right);
     }
     public void perform(Argument args[], Context context)
-    throws ExtensionException , org.nlogo.api.LogoException {
+    throws ExtensionException, LogoException {
       if(!System.getProperty("os.name").startsWith("Mac")) return;
       try {
         String voice = args[0].getString();
