@@ -9,14 +9,14 @@ end
 
 ;; says hello in the current voice
 to hello-turtles
-   speech:speak current-voice "hello turtles"
+  speech:speak current-voice "hello turtles"
 end
 
 ;; makes a turtle for each voice and each 
 ;; one says hello
 to demo-voices
-  ca
-  crt length speech:voices [
+  clear-all
+  create-ordered-turtles length speech:voices [
     set label item who speech:voices
     fd 15 + random 5
     speech:speak item who speech:voices item who speech:voices
@@ -24,7 +24,7 @@ to demo-voices
 end
 
 
-; (C) 2004 Uri Wilensky.  This code may be freely copied, distributed,
+; (C) 2004-2011 Uri Wilensky.  This code may be freely copied, distributed,
 ; altered, or otherwise used by anyone for any purpose.
 ; 
 ; THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -61,17 +61,10 @@ GRAPHICS-WINDOW
 -25
 25
 0
-1
+0
 1
 ticks
-
-CC-WINDOW
-5
-462
-452
-557
-Command Center
-0
+30.0
 
 BUTTON
 55
@@ -88,6 +81,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 MONITOR
 134
@@ -115,6 +109,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
 55
@@ -131,6 +126,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
 213
@@ -147,6 +143,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
 35
@@ -163,14 +160,15 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
-16
-353
-258
-398
-NIL
-foreach speech:voices [\nprint ?\n]
+470
+51
+720
+84
+print voices
+clear-output\nforeach speech:voices output-print
 NIL
 1
 T
@@ -179,19 +177,22 @@ NIL
 NIL
 NIL
 NIL
+1
+
+OUTPUT
+474
+83
+714
+443
+12
 
 @#$#@#$#@
-VERSION
--------
-$Id: Speech Demo.nlogo 38423 2008-02-29 14:05:19Z tisue $
+## WHAT IS IT?
 
-
-WHAT IS IT
-----------
 This sample model shows what you can do with the NetLogo speech extension.
 
-Use the arrows to choose a voice. Then click on one of the top two 
-buttons to hear how it sounds. Or click on demo-voices to hear all the 
+Use the arrows to choose a voice. Then click on one of the top two   
+buttons to hear how it sounds. Or click on demo-voices to hear all the   
 voices. 
 @#$#@#$#@
 default
@@ -422,7 +423,7 @@ Polygon -6524078 true true 46 128 33 120 21 118 11 123 3 138 5 160 13 178 9 192 
 Polygon -6524078 true true 67 122 96 126 63 144
 
 @#$#@#$#@
-NetLogo 4.0beta3
+NetLogo 5.0RC2
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
@@ -439,4 +440,6 @@ true
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
 
+@#$#@#$#@
+0
 @#$#@#$#@
